@@ -1,0 +1,30 @@
+
+.hero {
+  background-image: url('/public/images/cordoba.jpg');
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.container {
+    text-align: center;
+  }
+  
+  /* Estilos para el nombre MyTinerary */
+  .app-name {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para el slogan */
+  .slogan {
+    font-size: 24px;
+    font-style: italic;
+  }
