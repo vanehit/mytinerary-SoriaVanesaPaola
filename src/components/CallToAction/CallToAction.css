@@ -1,5 +1,6 @@
 .call-to-action-container{
   text-align: center;
+  margin-bottom: 25px;
 }
 
 
@@ -21,3 +22,8 @@
   h2 {
     margin-top: 25px;
   }
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #007bff; /* Cambia este color al que desees */
+}

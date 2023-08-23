@@ -1,50 +1,33 @@
-
-
-import React from 'react';
+import React, { useState } from 'react';
 import { PersonFill } from 'react-bootstrap-icons';
 import { Link as Anchor } from 'react-router-dom';
-
-import './Header.css'
+import { Navbar, Nav, Container } from 'react-bootstrap';
 
 const Header = () => {
+  const [expanded, setExpanded] = useState(false);
+
   return (
-    <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container">
-          <Anchor className="navbar-brand" to="/">
-            MyTinerary
-          </Anchor>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <Anchor className="nav-link" to="/">
-                  Home
-                </Anchor>
-              </li>
-              <li className="nav-item">
-                <Anchor className="nav-link" to="/cities">
-                  Cities
-                </Anchor>
-              </li>
-            </ul>
-          </div>
-          <Anchor className="btn" to="/login">
-            <PersonFill /> Log In
-          </Anchor>
-        </div>
-      </nav>
-    </>
+    <Navbar bg="light" expand="lg">
+      <Container>
+        <Anchor className="navbar-brand" to="/">
+          MyTinerary
+        </Anchor>
+        <Navbar.Toggle aria-controls="navbarNav" onClick={() => setExpanded(!expanded)} />
+        <Navbar.Collapse id="navbarNav" className={`collapse navbar-collapse ${expanded ? 'show' : ''}`}>
+          <Nav className="ms-auto">
+            <Nav.Link as={Anchor} to="/">
+              Home
+            </Nav.Link>
+            <Nav.Link as={Anchor} to="/cities">
+              Cities
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+        <Anchor className="btn" to="/login">
+          <PersonFill /> Log In
+        </Anchor>
+      </Container>
+    </Navbar>
   );
 };
 

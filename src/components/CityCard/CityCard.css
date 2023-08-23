@@ -1,43 +1,34 @@
-.city-card {
-  position: relative;
-  background-color: #f0f0f0;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+.city-card-container.detail-card {
+  width: 100%;
+  max-width: 400px; 
+  margin: 0 auto; 
 }
 
-.city-image {
-  width: 100%;
-  height: 100%; 
+.city-card {
+  position: relative;
+}
+
+.city-card img {
+  height: 300px; 
   object-fit: cover;
 }
 
-.city-title-container {
-  text-align: center;
-  padding: 10px;
-  background-color: rgba(255, 255, 255, 0.7);
-  flex-grow: 1; 
-}
-.city-title {
-  color: white;
-  font-size: 1.5rem;
-  text-align: center;
-  padding: 10px;
-}
-.city-title-overlay {
+.city-card .overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Cambia la transparencia */
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  opacity: 0; /* Empieza con transparencia, luego se mostrará con hover */
-  transition: opacity 0.3s ease-in-out;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.city-card:hover .city-title-overlay {
-  opacity: 1; /* Muestra el título al pasar el cursor sobre la card */
+.city-card:hover .overlay {
+  opacity: 1;
 }
