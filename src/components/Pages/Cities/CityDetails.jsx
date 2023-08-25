@@ -5,24 +5,42 @@ import CityCard from '../../CityCard/CityCard';
 import axios from 'axios';
 
 const CityDetail = () => {
-  const { cityId } = useParams();
+  const { _id } = useParams();
   const [city, setCity] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Hacer la solicitud a la API para obtener los detalles de la ciudad
-    axios.get(`/api/cities/${cityId}`)
-      .then(response => setCity(response.data))
-      .catch(err => console.error('Error fetching city details:', err));
-  }, [cityId]);
+    axios.get(`http://localhost:5000/cities/${ _id }`)
+      .then(response => {
+        setCity(response.data);
+        setIsLoading(false); // Marca que la carga se ha completado
+      })
+      .catch(err => {
+        console.error('Error fetching city details:', err);
+        setIsLoading(false); // Marca que la carga se ha completado incluso si hay error
+      });
+  }, [_id]);
+
+  if (isLoading) {
+    return <div>Loading...</div>; //  mensaje de carga mientras se obtienen los detalles
+  }
 
   if (!city) {
     return <div>City not found</div>;
   }
+  
+  const backgroundImageStyle = {
+    backgroundImage: `url(http://localhost:5000${city.imageUrl})`
+  };
+
+  const imageUrlPrefix = '';
+
   return (
-    <Container>
+    <Container className="city-detail" style={backgroundImageStyle}>
       <CityCard
         cityName={city.name}
-        imageUrl={city.imageUrl}
+        imageUrl={`${imageUrlPrefix}${city.imageUrl}`}
         country={city.location.country}
         city={city.location.city}
       />
@@ -32,3 +50,8 @@ const CityDetail = () => {
 };
 
 export default CityDetail;
+
+
+
+
+
