@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import CityCard from '../../CityCard/CityCard';
 import './Cities.css';
-import { Link as Anchor } from 'react-router-dom'; 
+import { Link as Anchor } from 'react-router-dom';
 import axios from 'axios';
 
 
