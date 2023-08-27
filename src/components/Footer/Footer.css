@@ -1,5 +1,4 @@
-.footer {
-  background-color: #f5f5f5;
+.transparent-footer {
   padding: 20px 0;
 }
 
@@ -28,18 +27,6 @@
   color: #007bff;
 }
 
-.navbar {
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
-}
-
-.navbar-brand {
-  font-size: 24px;
-  color: #333;
-  text-decoration: none;
-  margin-right: 20px;
-  font-weight: bold;
-}
 
 .navbar-toggler {
   border: none;
@@ -58,7 +45,6 @@
 }
 
 .nav-link {
-  color: #333;
   text-decoration: none;
   transition: color 0.3s ease;
 }

@@ -7,7 +7,7 @@ const Header = () => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar className="transparent-navbar" expand="lg">
       <Container>
         <Anchor className="navbar-brand" to="/">
           MyTinerary

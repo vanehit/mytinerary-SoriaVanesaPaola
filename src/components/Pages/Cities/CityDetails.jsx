@@ -31,24 +31,21 @@ const CityDetail = () => {
     return <div>City not found</div>;
   }
   
-
   const imageUrlPrefix = '';
 
 
-  const backgroundImageStyle = {
-    backgroundImage: `url(http://localhost:5000${city.imageUrl})`
-  };
-
   return (
+    
     <Container className="city-detail">
-      <div className="city-detail-background" style={backgroundImageStyle}></div>
-      <CityCard
-        cityName={city.name}
-        imageUrl={`${imageUrlPrefix}${city.imageUrl}`}
-        country={city.location.country}
-        city={city.location.city}
-      />
-      <h3>{city.name}</h3>
+      <div className="city-detail-background"></div>
+      <div className="city-detail-overlay">
+        <CityCard
+          cityName={city.name}
+          imageUrl={`${imageUrlPrefix}${city.imageUrl}`}
+          country={city.location.country}
+          city={city.location.city}
+        />
+      </div>
     </Container>
   );
 };

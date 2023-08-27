@@ -7,7 +7,7 @@ import './Footer.css';
 const Footer = () => {
   return (
       <>
-        <footer className="footer">
+        <footer className="transparent-footer">
             <div className="container__footer">
                 <div className="footer-social">
                 <a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer">
@@ -23,7 +23,7 @@ const Footer = () => {
                     <FaGithub className="social-icon" />
                 </a>
                 </div>
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <nav className="navbar navbar-expand-lg">
                 <div className="container">
                     <ul className="navbar-nav ms-auto">
                     <li className="nav-item">

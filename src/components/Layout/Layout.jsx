@@ -9,7 +9,7 @@ const Layout = () => {
 
       <>
           <Header /> {/* rEste enderiza el componente Header */}
-          <div className="layout-container">
+          <div>
               <Outlet /> {/* este renderiza el contenido de las rutas */}
           </div>
           <Footer /> {/* y este renderiza el componente Footer */}
