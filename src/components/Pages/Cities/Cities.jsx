@@ -5,7 +5,7 @@ import CityCard from '../../CityCard/CityCard';
 import './Cities.css';
 import { Link as Anchor } from 'react-router-dom';
 import { BsSearch } from 'react-icons/bs';
-import { setCities, filterCities } from '../../../store/reducers/cityReducers';
+import { setCities } from '../../../store/reducers/cityReducers';
 import axios from 'axios';
 
 
@@ -26,17 +26,18 @@ import axios from 'axios';
         });
     }, [dispatch]);
   
-    const handleSearch = () => {
-      dispatch(filterCities(search));
-  };
-  
-  const handleEnterSearch = (e) => {
+    const handleEnterSearch = (e) => {
       if (e.key === 'Enter') {
-          dispatch(filterCities(search));
+        axios.get(`http://localhost:5000/cities?search=${search}`)
+          .then(response => {
+            // Usamos la acción setCities para almacenar las ciudades filtradas en el store
+            dispatch(setCities(response.data));
+          })
+          .catch(error => {
+            console.error('Error fetching filtered cities:', error);
+          });
       }
-  };
-  
-
+    };
 
     const imageUrlPrefix = '';
 
@@ -51,7 +52,7 @@ import axios from 'axios';
           onChange={(e) => setSearch(e.target.value)}
           onKeyPress={handleEnterSearch}
         />
-        <button className="search-button" onClick={handleSearch}>
+        <button className="search-button ">
           <BsSearch />
         </button>
       </div>

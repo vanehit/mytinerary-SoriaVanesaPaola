@@ -13,14 +13,8 @@ const citySlice = createSlice({
       state.cities = action.payload;
       state.filteredCities = action.payload;
     },
-    filterCities: (state, action) => {
-      const search = action.payload.toLowerCase();
-      state.filteredCities = state.cities.filter(city =>
-        city.name.toLowerCase().includes(search)
-      );
-    },
   },
 });
 
-export const { setCities, filterCities } = citySlice.actions;
+export const { setCities } = citySlice.actions;
 export default citySlice.reducer;
