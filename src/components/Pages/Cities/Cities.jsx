@@ -1,42 +1,44 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col } from 'react-bootstrap';
 import CityCard from '../../CityCard/CityCard';
 import './Cities.css';
 import { Link as Anchor } from 'react-router-dom';
 import { BsSearch } from 'react-icons/bs';
+import { setCities, filterCities } from '../../../store/reducers/cityReducers';
 import axios from 'axios';
 
 
-const Cities = () => {
-  const [cities, setCities] = useState([]);
-  const [search, setSearch] = useState("");
 
-  const imageUrlPrefix = '';
-
+    const Cities = () => {
+    const [search, setSearch] = useState(""); 
+    const dispatch = useDispatch(); // Obtenemos la función dispatch de Redux
+    const cities = useSelector(state => state.city.filteredCities); // Obtenemos el estado del store mediante useSelector
+  
     useEffect(() => {
-      // Realizamos la solicitud GET a la API para obtener la lista de ciudades
       axios.get('http://localhost:5000/cities')
         .then(response => {
-          // Manejamos la respuesta y actualizar el estado 'cities'
-          setCities(response.data);
+          // Usamos la acción setCities para almacenar las ciudades en el store
+          dispatch(setCities(response.data));
         })
         .catch(error => {
-          // Manejamos los errores en caso de que ocurran
           console.error('Error fetching cities:', error);
         });
-    }, []);
-
+    }, [dispatch]);
+  
     const handleSearch = () => {
-      const lowercaseSearch = search.toLowerCase();
-      
-      axios.get(`http://localhost:5000/cities?search=${lowercaseSearch}`)
-        .then(response => {
-          setCities(response.data);
-        })
-        .catch(error => {
-          console.error('Error fetching cities:', error);
-        });
-    };
+      dispatch(filterCities(search));
+  };
+  
+  const handleEnterSearch = (e) => {
+      if (e.key === 'Enter') {
+          dispatch(filterCities(search));
+      }
+  };
+  
+
+
+    const imageUrlPrefix = '';
 
   return (
     <Container>
@@ -47,6 +49,7 @@ const Cities = () => {
           placeholder="Search cities..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          onKeyPress={handleEnterSearch}
         />
         <button className="search-button" onClick={handleSearch}>
           <BsSearch />
