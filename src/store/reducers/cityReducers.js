@@ -1,8 +1,10 @@
+// cityReducers.js
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   cities: [],
   filteredCities: [],
+  cityDetails: null, // Agregar el estado para almacenar los detalles de la ciudad
 };
 
 const citySlice = createSlice({
@@ -13,8 +15,11 @@ const citySlice = createSlice({
       state.cities = action.payload;
       state.filteredCities = action.payload;
     },
+    setCityDetails: (state, action) => {
+      state.cityDetails = action.payload;
+    },
   },
 });
 
-export const { setCities } = citySlice.actions;
+export const { setCities, setCityDetails } = citySlice.actions;
 export default citySlice.reducer;

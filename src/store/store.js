@@ -1,8 +1,11 @@
+// store.js
 import { configureStore } from '@reduxjs/toolkit';
-import cityReducers from './reducers/cityReducers';
+import cityReducer from './reducers/cityReducers';
+import itineraryReducer from './reducers/itineraryReducers';
 
 export const store = configureStore({
   reducer: {
-    city: cityReducers,
+    city: cityReducer,
+    itinerary: itineraryReducer,
   },
 });

@@ -1,41 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; 
-import { Container } from 'react-bootstrap';
-import CityCard from '../../CityCard/CityCard'; 
-import axios from 'axios';
+import { useParams, Outlet } from 'react-router-dom';
+import { Tabs, Tab, Container } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import CityCard from '../../CityCard/CityCard';
+import { loadCityDetails } from '../../../store/actions/cityActions';
+import Itineraries from './Itineraries'; 
 
 const CityDetail = () => {
   const { _id } = useParams();
-  //console.log("ID:", _id);
-  const [city, setCity] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+  const city = useSelector(state => state.city.cityDetails);
 
   useEffect(() => {
-    // Hacer la solicitud a la API para obtener los detalles de la ciudad
-    axios.get(`http://localhost:5000/cities/${_id}`)
-      .then(response => {
-        setCity(response.data);
-        setIsLoading(false); // Marca que la carga se ha completado
-      })
-      .catch(err => {
-        console.error('Error fetching city details:', err);
-        setIsLoading(false); // Marca que la carga se ha completado incluso si hay error
-      });
-  },[_id]);
+    dispatch(loadCityDetails(_id));
+  }, [_id, dispatch]);
 
-  if (isLoading) {
-    return <div>Loading...</div>; //  mensaje de carga mientras se obtienen los detalles
-  }
-
-  if (!city) {
-    return <div>City not found</div>;
-  }
-  
   const imageUrlPrefix = '';
 
+  const [activeTab, setActiveTab] = useState('details'); // Agregado useState
 
   return (
-    
     <Container className="city-detail">
       <div className="city-detail-background"></div>
       <div className="city-detail-overlay">
@@ -45,14 +29,18 @@ const CityDetail = () => {
           country={city.location.country}
           city={city.location.city}
         />
+        <Tabs activeKey={activeTab} onSelect={(tab) => setActiveTab(tab)}>
+          <Tab eventKey="details" title="Details">
+            <p>Name: {city.name}</p>
+            {/* ... Otros detalles de la ciudad ... */}
+          </Tab>
+          <Tab eventKey="itineraries" title="Itineraries">
+            <Itineraries cityId={city._id} />
+          </Tab>
+        </Tabs>
       </div>
     </Container>
   );
 };
 
 export default CityDetail;
-
-
-
-
-
