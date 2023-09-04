@@ -1,33 +1,33 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import CityCard from '../../CityCard/CityCard';
 import './Cities.css';
 import { Link as Anchor } from 'react-router-dom';
 import { BsSearch } from 'react-icons/bs';
 import Itineraries from './Itineraries';
-import { loadCityDetails, searchCities } from '../../../store/actions/cityActions'; 
-
+import { fetchCities } from '../../../store/actions/cityActions'; 
 
 const Cities = () => {
-
-  const [search, setSearch] = useState(""); 
+  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-  const cities = useSelector(state => state.city.filteredCities);
+  const cities = useSelector((state) => state.city.filteredCities);
   const [selectedCity, setSelectedCity] = useState(null);
+
+  useEffect(() => {
+    dispatch(fetchCities()); // Llama a la acción para cargar las ciudades
+  }, [dispatch]);
 
   const handleEnterSearch = (e) => {
     if (e.key === 'Enter') {
-      dispatch(searchCities(search)); // Llama a la acción de búsqueda
+     
+      dispatch(searchCities(search));
     }
   };
 
-
-    // Manejar el clic en una ciudad
-    const handleCityClick = (city) => {
-      setSelectedCity(city);
-      // Cargar detalles de ciudad usando la nueva actions
-      dispatch(loadCityDetails(city._id)); 
-    };
+  const handleCityClick = (city) => {
+    setSelectedCity(city);
+  };
 
     const imageUrlPrefix = '';
     

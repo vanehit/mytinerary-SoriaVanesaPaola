@@ -1,24 +1,14 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { setCityDetails, setCities } from '../reducers/cityReducers'; 
 
-export const loadCityDetails = (_id) => async (dispatch) => {
+// Acción asincrónica para cargar ciudades
+export const fetchCities = createAsyncThunk('cities/fetchCities', async () => {
+  const response = await axios.get('http://localhost:5000/cities');
+  return response.data;
+});
 
-  try {
-    const response =  await axios.get(`http://localhost:5000/cities/${_id}`);
-
-    dispatch(setCityDetails(response.data)); // Utiliza setCityDetails del reducer de ciudad
-    console.log(response);
-  } catch (error) {
-    console.error('Error loading city details:', error);
-  }
-};
-
-
-export const searchCities = (searchText) => async (dispatch) => {
-  try {
-    const response = await axios.get(`http://localhost:5000/cities?search=${searchText}`);
-    dispatch(setCities(response.data));
-  } catch (error) {
-    console.error('Error fetching filtered cities:', error);
-  }
-};
+// Acción asincrónica para cargar detalles de la ciudad por ID
+export const fetchCityDetails = createAsyncThunk('city/fetchCityDetails', async (cityId) => {
+  const response = await axios.get(`http://localhost:5000/cities/${cityId}`);
+  return response.data;
+});

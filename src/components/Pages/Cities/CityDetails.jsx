@@ -3,17 +3,17 @@ import { useParams, Outlet } from 'react-router-dom';
 import { Tabs, Tab, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import CityCard from '../../CityCard/CityCard';
-import { loadCityDetails } from '../../../store/actions/cityActions';
+import { fetchCityDetails } from '../../../store/actions/cityActions';
 import Itineraries from './Itineraries'; 
 
 const CityDetail = () => {
-  const { _id } = useParams();
+  const { cityId } = useParams();
   const dispatch = useDispatch();
-  const city = useSelector(state => state.city.cityDetails);
+  const city = useSelector((state) => state.city.cityDetails);
 
   useEffect(() => {
-    dispatch(loadCityDetails(_id));
-  }, [_id, dispatch]);
+    dispatch(fetchCityDetails(cityId)); // Llama a la acción para cargar los detalles de la ciudad por ID
+  }, [cityId, dispatch]);
 
   const imageUrlPrefix = '';
 

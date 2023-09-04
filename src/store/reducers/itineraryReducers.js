@@ -1,20 +1,28 @@
-// itineraryReducers.js
 import { createSlice } from '@reduxjs/toolkit';
-
-const initialState = {
-  itineraries: [],
-};
+import { fetchItinerariesByCity } from '../actions/itineraryActions';
 
 const itinerarySlice = createSlice({
   name: 'itinerary',
-  initialState,
-  reducers: {
-    setItineraries: (state, action) => {
-      state.itineraries = action.payload;
-    },
+  initialState: {
+    itineraries: [],
+    status: 'idle',
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchItinerariesByCity.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchItinerariesByCity.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.itineraries = action.payload;
+      })
+      .addCase(fetchItinerariesByCity.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
   },
 });
-
-export const { setItineraries } = itinerarySlice.actions;
 
 export default itinerarySlice.reducer;
