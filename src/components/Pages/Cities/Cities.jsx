@@ -6,7 +6,7 @@ import './Cities.css';
 import { Link as Anchor } from 'react-router-dom';
 import { BsSearch } from 'react-icons/bs';
 import Itineraries from './Itineraries';
-import { fetchCities } from '../../../store/actions/cityActions'; 
+import { fetchCities, searchCities } from '../../../store/actions/cityActions'; 
 
 const Cities = () => {
   const [search, setSearch] = useState("");
@@ -21,7 +21,7 @@ const Cities = () => {
   const handleEnterSearch = (e) => {
     if (e.key === 'Enter') {
      
-      dispatch(searchCities(search));
+      dispatch(searchCities(search));//llama a la acción para buscar las ciudades
     }
   };
 
@@ -50,7 +50,7 @@ const Cities = () => {
       <Row>
         {cities.map((city, idx) => (
           <Col key={idx} xs={12} sm={6} md={4} lg={3}>
-            <Anchor to={`/city/${city._id}`}>
+            <Anchor to={`/cities/${city._id}`}>
               <CityCard
                 cityName={city.name}
                 imageUrl={`${imageUrlPrefix}${city.imageUrl}`}

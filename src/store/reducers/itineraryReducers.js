@@ -16,7 +16,7 @@ const itinerarySlice = createSlice({
       })
       .addCase(fetchItinerariesByCity.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.itineraries = action.payload;
+        state.itineraries = [...action.payload]; // utilizamos el spread operator para actualizar los itinerarios
       })
       .addCase(fetchItinerariesByCity.rejected, (state, action) => {
         state.status = 'failed';

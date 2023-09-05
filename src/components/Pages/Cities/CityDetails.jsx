@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Outlet } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Tabs, Tab, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import CityCard from '../../CityCard/CityCard';
 import { fetchCityDetails } from '../../../store/actions/cityActions';
-import Itineraries from './Itineraries'; 
+import Itineraries from './Itineraries';
 
 const CityDetail = () => {
   const { cityId } = useParams();
@@ -12,30 +11,29 @@ const CityDetail = () => {
   const city = useSelector((state) => state.city.cityDetails);
 
   useEffect(() => {
-    dispatch(fetchCityDetails(cityId)); // Llama a la acción para cargar los detalles de la ciudad por ID
+    dispatch(fetchCityDetails(cityId));
   }, [cityId, dispatch]);
 
-  const imageUrlPrefix = '';
+  const imageUrl = city ? city.imageUrl : ''; 
 
-  const [activeTab, setActiveTab] = useState('details'); // Agregado useState
+  const [activeTab, setActiveTab] = useState('details');
 
   return (
     <Container className="city-detail">
-      <div className="city-detail-background"></div>
+      {imageUrl && (
+        <div className="city-detail-background" style={{ backgroundImage: `url(${imageUrl})` }}></div>
+      )}
       <div className="city-detail-overlay">
-        <CityCard
-          cityName={city.name}
-          imageUrl={`${imageUrlPrefix}${city.imageUrl}`}
-          country={city.location.country}
-          city={city.location.city}
-        />
         <Tabs activeKey={activeTab} onSelect={(tab) => setActiveTab(tab)}>
           <Tab eventKey="details" title="Details">
-            <p>Name: {city.name}</p>
-            {/* ... Otros detalles de la ciudad ... */}
+            {city && (
+              <p>Name: {city.name}</p>
+            )}
           </Tab>
           <Tab eventKey="itineraries" title="Itineraries">
-            <Itineraries cityId={city._id} />
+            {city && (
+              <Itineraries cityId={city._id} />
+            )}
           </Tab>
         </Tabs>
       </div>

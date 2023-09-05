@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCities, fetchCityDetails } from '../actions/cityActions';
+import { fetchCities, fetchCityDetails, searchCities } from '../actions/cityActions';
 
 const citySlice = createSlice({
   name: 'city',
@@ -35,6 +35,10 @@ const citySlice = createSlice({
       .addCase(fetchCityDetails.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
+      })
+      .addCase(searchCities, (state, action) => {
+        // Actualizamos filteredCities con los resultados de búsqueda
+        state.filteredCities = action.payload;
       });
   },
 });
