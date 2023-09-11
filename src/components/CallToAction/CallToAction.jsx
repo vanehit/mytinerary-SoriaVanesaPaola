@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as Anchor } from 'react-router-dom';
 import './CallToAction.css';
 
 const CallToAction = () => {
@@ -9,7 +10,9 @@ const CallToAction = () => {
           <div className="content">
             <h2>Explore amazing cities</h2>
             <p>Discover the best cities to travel and explore the world with us.</p>
-            <button className="btn">See Cities</button>
+            <Anchor to="/cities" className="btn">
+              See Cities
+            </Anchor>
           </div>
         </div>
       </section>
