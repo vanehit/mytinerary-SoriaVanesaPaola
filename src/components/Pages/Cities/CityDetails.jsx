@@ -22,7 +22,9 @@ const CityDetail = () => {
 
   return (
     <Container className="city-detail">
-      <div className="city-detail-background" style={{ backgroundImage: `url(${imageUrl})` }}></div>
+      <div className="city-detail-image-container">
+        <img src={imageUrl} alt={city.name} className="city-detail-image" />
+      </div>
       <div className="city-detail-overlay">
         <Tabs activeKey={activeTab} onSelect={(tab) => setActiveTab(tab)}>
           <Tab eventKey="details" title="Details">
@@ -40,5 +42,6 @@ const CityDetail = () => {
     </Container>
   );
 };
+
 
 export default CityDetail;
