@@ -33,3 +33,4 @@ export const updateFilteredCities = (filteredCities) => {
     payload: filteredCities,
   };
 };
+

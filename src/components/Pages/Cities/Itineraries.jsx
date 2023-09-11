@@ -6,7 +6,7 @@ import './Itineraries.css';
 
 
 
-const Itineraries = ({ cityId }) => {
+const Itineraries =  ({ cityId }) => {
   const dispatch = useDispatch();
   const itineraries = useSelector((state) => state.itinerary.itineraries);
 

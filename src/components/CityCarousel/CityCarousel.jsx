@@ -1,31 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Carousel, Container, Row, Col } from 'react-bootstrap';
 import CityCard from '../CityCard/CityCard';
-
-  const cities = [
-  { name: 'New York', imageUrl: '/public/images/newYork.jpg' },
-  { name: 'Paris', imageUrl: '/public/images/paris.jpg' },
-  { name: 'Tokyo', imageUrl: '/public/images/tokio.jpg' },
-  { name: 'London', imageUrl: '/public/images/london.jpg' },
-  { name: 'Sydney', imageUrl: '/public/images/sydney.jpg' },
-  { name: 'Rome', imageUrl: '/public/images/roma.jpg' },
-  { name: 'San Francisco', imageUrl: '/public/images/sanFrancisco.jpg' },
-  { name: 'Buenos Aires', imageUrl: '/public/images/buenosAires.jpg' },
-  { name: 'Dubai', imageUrl: '/public/images/dubai.jpg' },
-  { name: 'Berlin', imageUrl: '/public/images/berlin.jpg' },
-  { name: 'Cape Town', imageUrl: '/public/images/capeTown.jpg' },
-  { name: 'Moscow', imageUrl: '/public/images/moscow.jpg' },
-];
-//console.log(cities)
+import axios from 'axios';
 
 const CityCarousel = () => {
+  const [cities, setCities] = useState([]);
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
 
-  // ayuda al carousel pasar cada 5 seg
+  // Ayuda al carousel pasar cada 5 seg
   useEffect(() => {
     const interval = setInterval(() => {
       const nextIndex = (index + 1) % Math.ceil(cities.length / 4);
@@ -34,6 +20,17 @@ const CityCarousel = () => {
 
     return () => clearInterval(interval);
   }, [index]);
+
+  useEffect(() => {
+    // Realiza una solicitud para obtener las ciudades desde tu servidor
+    axios.get('http://localhost:5000/cities')
+      .then((response) => {
+        setCities(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching cities:', error);
+      });
+  }, []);
 
   return (
     <div className="city-carousel-container">
@@ -44,7 +41,7 @@ const CityCarousel = () => {
               <h3 className="my-4">Popular Mytineraries</h3>
               <Row xs={1} sm={2} md={3} lg={4} className="g-4">
                 {cities.slice(slideIdx * 4, slideIdx * 4 + 4).map((city) => (
-                  <Col key={city.name} xs={12} sm={6} md={4} lg={3}>
+                  <Col key={city._id} xs={12} sm={6} md={4} lg={3}>
                     <CityCard cityName={city.name} imageUrl={city.imageUrl} />
                   </Col>
                 ))}
@@ -58,4 +55,3 @@ const CityCarousel = () => {
 };
 
 export default CityCarousel;
-
