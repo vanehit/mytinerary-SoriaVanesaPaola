@@ -11,16 +11,15 @@ import { fetchCities } from '../../../store/actions/cityActions';
 const Cities = () => {
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
-  const cities = useSelector((state) => state.city.cities); // Obtén todas las ciudades
-  const [filteredCities, setFilteredCities] = useState([]); // Estado local para las ciudades filtradas
+  const cities = useSelector((state) => state.city.cities);
+  const [filteredCities, setFilteredCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
 
   useEffect(() => {
-    dispatch(fetchCities()); // Llama a la acción para cargar las ciudades
+    dispatch(fetchCities());
   }, [dispatch]);
 
   useEffect(() => {
-    // Filtra las ciudades en función de la búsqueda
     const filtered = cities.filter((city) =>
       city.name.toLowerCase().includes(search.toLowerCase())
     );
@@ -29,7 +28,6 @@ const Cities = () => {
 
   const handleEnterSearch = (e) => {
     if (e.key === 'Enter') {
-      // Simplemente actualiza el estado 'search' para activar el efecto secundario
       setSearch(e.target.value);
     }
   };
@@ -38,7 +36,7 @@ const Cities = () => {
     setSelectedCity(city);
   };
 
-  const imageUrlPrefix = ''; // Asegúrate de proporcionar la URL base adecuada aquí
+  const imageUrlPrefix = '';
 
   return (
     <Container>
@@ -56,21 +54,26 @@ const Cities = () => {
         </button>
       </div>
       <Row>
-        {filteredCities.map((city, idx) => (
-          <Col key={city._id} xs={12} sm={6} md={4} lg={3}>
-            <Anchor to={`/cities/${city._id}`}>
-              <CityCard
-                cityName={city.name}
-                imageUrl={`${imageUrlPrefix}${city.imageUrl}`}
-                country={city.location.country}
-                city={city.location.city}
-                onClick={() => handleCityClick(city)}
-              />
-            </Anchor>
+        {filteredCities && filteredCities.length > 0 ? (
+          filteredCities.map((city, idx) => (
+            <Col key={city._id} xs={12} sm={6} md={4} lg={3}>
+              <Anchor to={`/cities/${city._id}`}>
+                <CityCard
+                  cityName={city.name}
+                  imageUrl={`${imageUrlPrefix}${city.imageUrl}`}
+                  country={city.location.country}
+                  city={city.location.city}
+                  onClick={() => handleCityClick(city)}
+                />
+              </Anchor>
+            </Col>
+          ))
+        ) : (
+          <Col xs={12}>
+            <p>No cities found.</p>
           </Col>
-        ))}
+        )}
       </Row>
-      {/* Mostramos Itineraries si una ciudad está seleccionada */}
       {selectedCity && <Itineraries cityId={selectedCity._id} />}
     </Container>
   );

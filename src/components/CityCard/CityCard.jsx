@@ -3,7 +3,6 @@ import { Card } from 'react-bootstrap';
 import './CityCard.css';
 
 const CityCard = ({ cityName, imageUrl, country, city }) => {
-  
   return (
     <div className="city-card-container">
       <Card className="city-card">
