@@ -14,15 +14,15 @@ const CityDetail = () => {
     dispatch(fetchCityDetails(cityId));
   }, [cityId, dispatch]);
 
+  // Ruta relativa para la imagen, sin "/public"
   const imageUrl = city ? city.imageUrl : ''; 
+  console.log(imageUrl)
 
   const [activeTab, setActiveTab] = useState('details');
 
   return (
     <Container className="city-detail">
-      {imageUrl && (
-        <div className="city-detail-background" style={{ backgroundImage: `url(${imageUrl})` }}></div>
-      )}
+      <div className="city-detail-background" style={{ backgroundImage: `url(${imageUrl})` }}></div>
       <div className="city-detail-overlay">
         <Tabs activeKey={activeTab} onSelect={(tab) => setActiveTab(tab)}>
           <Tab eventKey="details" title="Details">

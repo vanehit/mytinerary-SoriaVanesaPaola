@@ -7,6 +7,8 @@ import CityDetail from './components/Pages/Cities/CityDetails';
 import { Provider } from 'react-redux';
 import Itineraries from './components/Pages/Cities/Itineraries';
 import { store } from './store/store';
+import Signup from './components/Pages/Signup';
+import Login from './components/Pages/Login';
 
 
 
@@ -23,6 +25,8 @@ function App() {
             <Route path="/cities" element={<Cities />} />
             <Route path="/cities/:cityId" element={<CityDetail />} />
             <Route path="/itineraries/city/:_id" element={<Itineraries />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
           </Route>
         </Routes>
       </Router>

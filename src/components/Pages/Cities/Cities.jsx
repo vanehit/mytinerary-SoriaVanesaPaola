@@ -11,7 +11,7 @@ import { fetchCities, searchCities } from '../../../store/actions/cityActions';
 const Cities = () => {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-  const cities = useSelector((state) => state.city.filteredCities);
+  const filteredCities = useSelector((state) => state.city.filteredCities);
   const [selectedCity, setSelectedCity] = useState(null);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const Cities = () => {
         </button>
       </div>
       <Row>
-        {cities.map((city, idx) => (
+        {filteredCities.map((city, idx) => (
           <Col key={idx} xs={12} sm={6} md={4} lg={3}>
             <Anchor to={`/cities/${city._id}`}>
               <CityCard
