@@ -1,7 +1,8 @@
+/* Estilos para el HeroSection */
 .hero {
   background-image: url('/public/images/cordoba.jpg');
   background-size: cover;
-  background-position: center center;
+  background-position: center;
   height: 100vh;
   margin: 0;
   padding: 0;
@@ -15,16 +16,19 @@
   text-align: center;
 }
 
-/* Estilos para el nombre MyTinerary */
+/* Estilos para el nombre MyTinerary en la sección Hero */
 .app-name {
   font-size: 48px;
   font-weight: bold;
   margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  padding-top: 10px; /* Agrega espacio hacia arriba */
 }
 
-/* Estilos para el slogan */
+/* Estilos para el slogan en la sección Hero */
 .slogan {
   font-size: 24px;
   font-style: italic;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); 
+  margin-top: 10px; 
 }
-

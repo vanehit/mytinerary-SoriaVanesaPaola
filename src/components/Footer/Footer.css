@@ -1,97 +1,57 @@
-.transparent-footer {
-  padding: 20px 0;
-}
-
 .container__footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  max-width: 1200px;
-  margin: 0 auto;
+  flex-direction: column; 
+  align-items: left; 
+  padding: 20px 0;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0; 
+  z-index: 1;
 }
 
+/* Estilos para la sección de redes sociales */
 .footer-social {
   display: flex;
   gap: 10px;
-  align-items: center;
+  align-items: center; 
 }
 
+/* Estilos para los iconos de las redes sociales */
 .social-icon {
-  font-size: 24px;
-  color: #333;
+  font-size: 30px;
+  color: #007bff; 
   transition: color 0.3s ease;
 }
 
 .social-icon:hover {
-  color: #007bff;
+  color: #feac04; 
 }
 
 
-.navbar-toggler {
-  border: none;
+/* Estilos para el fotterNavbar */
+/* Estilo para los enlaces en negrita y efecto hover */
+.nav-itemFooter {
+  font-weight: bold;
+  color: #333; 
+  text-decoration: none; 
+  margin-right: 20px; 
+  transition: color 0.3s; 
 }
 
-.navbar-toggler-icon {
-  background-color: #333;
+.nav-itemFooter:last-child {
+  margin-right: 20px; 
 }
 
-.navbar-nav {
-  align-items: center;
+.nav-itemFooter:hover {
+  color: #007bff; 
 }
 
-.nav-item {
-  margin-right: 15px;
-}
 
-.nav-link {
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-  color: #007bff;
-}
-
-.btn {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.btn:hover {
-  background-color: #0056b3;
-}
-
-.footer-nav {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.footer-nav-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 20px;
-}
-
-.footer-nav-item {
-  font-size: 16px;
-}
-
-.footer-login {
-  font-size: 16px;
-}
-
-.footer-info {
-  flex-basis: 100%;
-  text-align: center;
-  margin-top: 10px;
-  font-size: 14px;
+/* Estilos para el autor */
+.footer-author {
+  margin-top: 10px; /* Añade un espacio superior para separar del contenido superior */
+  font-size: 14px; /* Tamaño de fuente del autor */
+  color: #333; /* Color de texto del autor */
+  text-align: center; /* Centra horizontalmente el autor */
 }
 

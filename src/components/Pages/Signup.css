@@ -1,8 +1,9 @@
-.login-container {
+.signup-container {
     position: relative;
     align-items: center;
     justify-content: center;
-    padding-top: 70px;
+    margin-top: 20px; 
+    margin-bottom: 20px; 
   }
   
   .background-image {
@@ -17,11 +18,19 @@
     z-index: -1; 
   }
   
-  .login-form {
+  .signup-form {
     background-color: rgba(255, 255, 255, 0.8); 
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   }
-
+  
+  
+  /* Estilo para la imagen seleccionada */
+  .selected-image {
+    margin-top: 10px;
+    max-width: 100%;
+    height: auto;
+  }
+  
   

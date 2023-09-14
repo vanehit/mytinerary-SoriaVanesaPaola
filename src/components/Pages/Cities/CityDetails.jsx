@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Tabs, Tab, Container } from 'react-bootstrap';
+import { Button, Container, Nav, Navbar, NavItem } from 'react-bootstrap';
+import { Link as Anchor } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCityDetails } from '../../../store/actions/cityActions';
-import Itineraries from './Itineraries';
+import { fetchItinerariesByCity } from '../../../store/actions/itineraryActions'; // Importa la acción para buscar itinerarios por ciudad
+import './CityDetails.css'; 
+
+
+
 
 const CityDetail = () => {
   const { cityId } = useParams();
@@ -11,37 +16,40 @@ const CityDetail = () => {
   const city = useSelector((state) => state.city.cityDetails);
 
   useEffect(() => {
-    dispatch(fetchCityDetails(cityId));
+    if (cityId) {
+      dispatch(fetchCityDetails(cityId));
+      dispatch(fetchItinerariesByCity(cityId));
+    }
   }, [cityId, dispatch]);
 
-  // Ruta relativa para la imagen, sin "/public"
-  const imageUrl = city ? city.imageUrl : ''; 
-  console.log(imageUrl)
-
-  const [activeTab, setActiveTab] = useState('details');
+  const imageUrl = city ? city.imageUrl : '';
+  const cityName = city ? city.name : '';
+  const cityDescription = city ? city.description : '';
 
   return (
-    <Container className="city-detail">
-      <div className="city-detail-image-container">
-        <img src={imageUrl} alt={city.name} className="city-detail-image" />
+    <>
+      <div className="city-detail">
+        <div
+          className="city-detail-background"
+          style={{
+            backgroundImage: `url(${imageUrl})`,
+          }}
+        >
+          <div className="city-detail-overlay">
+            <Container>
+              <div className="city-detail-overlay-content">
+                <h2>{cityName}</h2>
+                <p>{cityDescription}</p>
+                <Anchor to={`/itineraries/city/${cityId}`}>
+                  <Button variant="primary">Show Itinerary</Button>
+                </Anchor>
+              </div>
+            </Container>
+          </div>
+        </div>
       </div>
-      <div className="city-detail-overlay">
-        <Tabs activeKey={activeTab} onSelect={(tab) => setActiveTab(tab)}>
-          <Tab eventKey="details" title="Details">
-            {city && (
-              <p>Name: {city.name}</p>
-            )}
-          </Tab>
-          <Tab eventKey="itineraries" title="Itineraries">
-            {city && (
-              <Itineraries cityId={city._id} />
-            )}
-          </Tab>
-        </Tabs>
-      </div>
-    </Container>
+    </>
   );
 };
-
 
 export default CityDetail;

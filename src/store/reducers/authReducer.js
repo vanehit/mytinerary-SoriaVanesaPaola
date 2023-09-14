@@ -1,22 +1,20 @@
-import { loginUser, registerUser } from '../../store/actions/authActions';
-
 const initialState = {
-  isAuthenticated: false, //estado inicial de la autenticación
+  isAuthenticated: false, // Estado inicial de la autenticación
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case loginUser.type: 
+    case 'LOGIN_SUCCESS':
       return {
         ...state,
-        isAuthenticated: true, 
+        isAuthenticated: true,
       };
-    case registerUser.type: 
+    case 'REGISTER_SUCCESS':
       return {
         ...state,
-        isAuthenticated: false, 
+        isAuthenticated: false,
       };
-    // Otros casos
+    
     default:
       return state;
   }

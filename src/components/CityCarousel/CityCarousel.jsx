@@ -15,7 +15,7 @@ const CityCarousel = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchCities()); // cargamos las cities con redux
+    dispatch(fetchCities());
   }, [dispatch]);
 
   return (
@@ -29,7 +29,7 @@ const CityCarousel = () => {
                 {cities.slice(slideIdx * 4, slideIdx * 4 + 4).map((city) => (
                   <Col key={city._id} xs={12} sm={6} md={4} lg={3}>
                     <div className="carousel-item">
-                      <CityCard cityName={city.name} imageUrl={city.imageUrl} /> {/* No es necesario agregar imageUrlPrefix */}
+                      <CityCard cityName={city.name} imageUrl={city.imageUrl} />
                     </div>
                   </Col>
                 ))}

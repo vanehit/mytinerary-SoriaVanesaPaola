@@ -1,19 +1,20 @@
 import React from 'react';
-import Header from '../Header/Header'; 
-import Footer from '../Footer/Footer'; 
-import './Layout.css'
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import { Outlet } from 'react-router-dom';
+import './Layout.css'
 
 const Layout = () => {
   return (
-
-      <>
-          <Header /> {/* rEste enderiza el componente Header */}
-          <div>
-              <Outlet /> {/* este renderiza el contenido de las rutas */}
-          </div>
-          <Footer /> {/* y este renderiza el componente Footer */}
-      </>
+    <>
+     <div className="layout-container">
+      <Header className="layout__header" />
+      <div className="main-content">
+        <Outlet />
+      </div>
+      <Footer className="layout__footer" />
+    </div>
+    </>
   );
 };
 

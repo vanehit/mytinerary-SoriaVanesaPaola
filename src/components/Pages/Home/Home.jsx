@@ -1,12 +1,13 @@
 import React from 'react';
+import HeroSection from '../../HeroSection/HeroSection'; // Agrega tu HeroSection
 import CityCarousel from '../../CityCarousel/CityCarousel';
-import HeroSection from '../../HeroSection/HeroSection';
 import CallToAction from '../../CallToAction/CallToAction';
+
 
 const Home = () => {
   return (
     <>
-      <HeroSection  />
+      <HeroSection /> 
       <CityCarousel />
       <CallToAction />
     </>
