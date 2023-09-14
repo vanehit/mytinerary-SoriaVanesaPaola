@@ -1,5 +1,6 @@
+// Reducer de autenticación
 const initialState = {
-  isAuthenticated: false, // Estado inicial de la autenticación
+  isAuthenticated: false,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -9,12 +10,13 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated: true,
       };
-    case 'REGISTER_SUCCESS':
+    case 'LOGIN_FAILURE':
+    case 'REGISTER_FAILURE':
       return {
         ...state,
         isAuthenticated: false,
+        error: action.payload,
       };
-    
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../store/actions/authActions';
 import { useNavigate } from 'react-router-dom';
@@ -8,12 +8,13 @@ import './Login.css';
 const Login = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const error = useSelector((state) => state.auth.error);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-  }); 
+  });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -24,16 +25,16 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      // Llama a la acción de inicio de sesión
+      // Llamamos a la acción de inicio de sesión
       await dispatch(loginUser(formData));
 
       // Si el inicio de sesión es exitoso, redirige a la página principal
       if (isAuthenticated) {
-        // Redirige a la página principal
+        // Redirigimos a la página principal
         navigate('/');
       }
     } catch (error) {
-      // Maneja errores aquí, por ejemplo, muestra un mensaje de error al usuario
+      // Manejamos errores / muestra un mensaje de error al usuario
       console.error(error);
     }
   };
