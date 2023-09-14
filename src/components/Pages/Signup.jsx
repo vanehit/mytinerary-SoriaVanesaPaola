@@ -7,6 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Link as Anchor } from 'react-router-dom'; 
 import { FaGoogle } from 'react-icons/fa';
 import './Signup.css';
+import Swal from 'sweetalert2';
 
 
 
@@ -90,6 +91,13 @@ const Signup = () => {
       await dispatch(registerUser(formData));
 
       if (isAuthenticated) {
+        //alerta de usuario creado
+        Swal.fire({
+          icon: 'success',
+          title: 'Registration successfu',
+          text: 'You are now registered on our platform.',
+        });
+
         // Redirigimos al usuario a la página principal si el registro es exitoso
         navigate('/');
       }
