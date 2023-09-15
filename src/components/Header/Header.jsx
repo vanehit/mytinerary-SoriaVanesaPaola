@@ -2,11 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { PersonFill } from 'react-bootstrap-icons';
 import { Link as Anchor, useLocation } from 'react-router-dom'; // Importa useLocation para obtener la ruta actual
 import { Navbar, Nav, Container } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import './Header.css'
 
 const Header = ({ transparent }) => {
   const [scrolling, setScrolling] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const location = useLocation(); // Obtiene la ruta actual
+
+  // Obtiene el estado de autenticación para que el boton cambie
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -44,7 +49,7 @@ const Header = ({ transparent }) => {
               </Anchor>
             </Nav>
           </Navbar.Collapse>
-          <Anchor className="btn btn-login" to="/login">
+          <Anchor className={`btn btn-login ${isAuthenticated ? 'btn-authenticated' : ''}`} to="/login">
             <PersonFill /> Log In
           </Anchor>
         </Container>

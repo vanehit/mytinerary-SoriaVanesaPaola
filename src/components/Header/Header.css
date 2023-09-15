@@ -1,0 +1,9 @@
+.btn-login {
+    background-color: #007bff; /* Color predeterminado */
+    color: white;
+  }
+  
+  /* Estilos para el botón de inicio de sesión cuando el usuario está autenticado */
+  .btn-authenticated {
+    background-color: #28a745; 
+    color: white;

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../store/actions/authActions';
 import { useNavigate } from 'react-router-dom';
 import { Link as Anchor } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import './Signup.css';
 
 const Signup = () => {
@@ -30,18 +31,25 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      await dispatch(registerUser(formData));
+    await dispatch(registerUser(formData));
 
-      if (isAuthenticated) {
-        // Redireccionar a la página de inicio después de un tiempo
-        setTimeout(() => {
-          navigate('/');
-        }, 2000);
-      }
-    } catch (err) {
-      console.error('Error registering user:', err);
+    if (isAuthenticated) {
+      // Muestra una alerta de éxito utilizando SweetAlert2
+      Swal.fire({
+        icon: 'success',
+        title: 'Registration Successful',
+        text: 'You have successfully registered.',
+      });
+
+      // Redirecciona a la página de inicio después de un tiempo
+      setTimeout(() => {
+        navigate('/');
+      }, 2000);
     }
-  };
+  } catch (err) {
+    console.error('Error registering user:', err);
+  }
+};
 
   return (
     <div className="signup-container">
