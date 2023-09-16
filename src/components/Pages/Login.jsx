@@ -28,16 +28,19 @@ const Login = () => {
       // Llamamos a la acción de inicio de sesión
       await dispatch(loginUser(formData));
 
-      // Si el inicio de sesión es exitoso, redirige a la página principal
+      // Si el inicio de sesión es exitoso, redirige a la página principal con navigate
       if (isAuthenticated) {
-        // Redirigimos a la página principal
+      
         navigate('/');
       }
     } catch (error) {
-      // Manejamos errores / muestra un mensaje de error al usuario
+     
       console.error(error);
     }
   };
+
+  // Verificamos aca si ambos campos (email y password) tienen datos para habilitar el botón y que se ponga verde
+  const isButtonDisabled = !formData.email || !formData.password;
 
   return (
     <>
@@ -77,7 +80,9 @@ const Login = () => {
                 />
               </div>
               <div className="text-center">
-                <button type="submit" className="btn btn-primary">Continue</button>
+                <button type="submit" className="btn btn-primary" disabled={isButtonDisabled}>
+                  {isButtonDisabled ? 'Enter Email and Password' : 'Continue'}
+                </button>
               </div>
             </form>
             <hr />

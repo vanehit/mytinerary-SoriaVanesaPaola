@@ -11,7 +11,7 @@ const Signup = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const navigate = useNavigate();
 
-  // Manejo de errores y éxito
+  // Manejamos  errores y éxito
   const error = useSelector((state) => state.auth.error);
   const success = useSelector((state) => state.auth.success);
 
@@ -23,7 +23,7 @@ const Signup = () => {
   });
 
   const handleChange = (e) => {
-    // Actualizar el estado del formulario
+    // Actualizaamos el estado del formulario
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -34,14 +34,14 @@ const Signup = () => {
     await dispatch(registerUser(formData));
 
     if (isAuthenticated) {
-      // Muestra una alerta de éxito utilizando SweetAlert2
+      // Muestramos la alerta de éxito utilizando SweetAlert2
       Swal.fire({
         icon: 'success',
         title: 'Registration Successful',
         text: 'You have successfully registered.',
       });
 
-      // Redirecciona a la página de inicio después de un tiempo
+      // Redireccionamos a la página de inicio después de un tiempo
       setTimeout(() => {
         navigate('/');
       }, 2000);

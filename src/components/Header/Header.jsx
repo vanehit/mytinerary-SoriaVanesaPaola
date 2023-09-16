@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { PersonFill } from 'react-bootstrap-icons';
-import { Link as Anchor, useLocation } from 'react-router-dom'; // Importa useLocation para obtener la ruta actual
+import { Link as Anchor, useLocation } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser, loginUser } from '../../store/actions/authActions';
+import { useNavigate } from 'react-router-dom';
 import './Header.css'
 
 const Header = ({ transparent }) => {
   const [scrolling, setScrolling] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const location = useLocation(); // Obtiene la ruta actual
+  const location = useLocation();
+  const dispatch = useDispatch();
 
-  // Obtiene el estado de autenticación para que el boton cambie
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  // Obtiene el estado de autenticación desde Redux
+  const isAuthenticatedRedux = useSelector((state) => state.auth.isAuthenticated);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -26,6 +29,20 @@ const Header = ({ transparent }) => {
     } else {
       setScrolling(false);
     }
+  };
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Llama a la acción logoutUser cuando el usuario hace clic en "Logout"
+    dispatch(logoutUser());
+
+    // Utiliza navigate('/login') para navegar a la página de inicio de sesión
+    navigate('/login');
+  };
+
+  const handleLogin = () => {
+    dispatch(loginUser());
   };
 
   // Verifica si estás en la página de Ciudades (Cities)
@@ -49,9 +66,17 @@ const Header = ({ transparent }) => {
               </Anchor>
             </Nav>
           </Navbar.Collapse>
-          <Anchor className={`btn btn-login ${isAuthenticated ? 'btn-authenticated' : ''}`} to="/login">
-            <PersonFill /> Log In
-          </Anchor>
+          {isAuthenticatedRedux ? (
+            // Si el usuario está autenticado, muestra un botón "Logout" con el enlace a la página de cierre de sesión
+            <Anchor to="/" className="btn btn-logout btn-green" onClick={handleLogout}>
+              <PersonFill /> Log Out
+            </Anchor>
+          ) : (
+            // Si el usuario no está autenticado, muestra un botón "Log In" con el enlace a la página de inicio de sesión
+            <Anchor to="/login" className="btn btn-login btn-orange" onClick={handleLogin}>
+              <PersonFill /> Log In
+            </Anchor>
+          )}
         </Container>
       </Navbar>
     </>

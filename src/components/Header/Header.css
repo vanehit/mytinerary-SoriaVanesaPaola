@@ -3,7 +3,8 @@
     color: white;
   }
   
-  /* Estilos para el botón de inicio de sesión cuando el usuario está autenticado */
-  .btn-authenticated {
-    background-color: #28a745; 
-    color: white;
+.btn-logout {
+    background-color: green; /* Cambia el color de fondo a verde */
+    color: white; /* Cambia el color del texto a blanco */
+    /* Agrega cualquier otro estilo que desees */
+  }
