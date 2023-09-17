@@ -2,13 +2,13 @@ import React from 'react';
 import { FaTwitter, FaFacebook, FaInstagram, FaGithub } from 'react-icons/fa';
 import FooterNavbar from './FooterNavbar'; 
 
-const Footer = ({ transparent }) => {
+const Footer = () => {
   return (
     <>
-       <footer className={`container__footer ${transparent ? 'transparent-footer' : ''}`}>
+       <footer >
         <div className="footer-content">
          
-          <div className="footer-icons">
+          <div className="footer-social">
             <a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer">
               <FaTwitter className="social-icon" />
             </a>
