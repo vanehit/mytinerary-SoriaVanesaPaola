@@ -7,12 +7,12 @@ import './Layout.css'
 const Layout = () => {
   return (
     <>
-     <div className="layout-container">
+     <div>
       <Header className="layout__header" />
-      <div className="main-content">
+      <div>
         <Outlet />
       </div>
-      <Footer className="container__footer" />
+      <Footer />
     </div>
     </>
   );

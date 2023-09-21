@@ -5,9 +5,8 @@ import FooterNavbar from './FooterNavbar';
 const Footer = () => {
   return (
     <>
-       <footer >
+       <footer className='container__footer'>
         <div className="footer-content">
-         
           <div className="footer-social">
             <a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer">
               <FaTwitter className="social-icon" />

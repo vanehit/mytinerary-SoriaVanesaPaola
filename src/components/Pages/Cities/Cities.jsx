@@ -43,7 +43,7 @@ const Cities = () => {
   return (
     <>
       
-      <Container style={{ marginTop: '80px' }}>
+      <Container style={{ marginTop: '180px' }}>
         <h2>Cities</h2>
         <div className="search-container">
           <input

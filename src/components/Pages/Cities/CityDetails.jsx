@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button, Container, Nav, Navbar, NavItem } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link as Anchor } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCityDetails } from '../../../store/actions/cityActions';
@@ -23,32 +23,31 @@ const CityDetail = () => {
   }, [cityId, dispatch]);
 
   const imageUrl = city ? city.imageUrl : '';
+    console.log(imageUrl);
   const cityName = city ? city.name : '';
   const cityDescription = city ? city.description : '';
 
   return (
-    <>
-      <div className="city-detail">
-        <div
+    <div className="city-detail">
+      <div
           className="city-detail-background"
           style={{
             backgroundImage: `url(${imageUrl})`,
           }}
         >
+        <div className="main-content">
           <div className="city-detail-overlay">
-            <Container>
-              <div className="city-detail-overlay-content">
-                <h2>{cityName}</h2>
-                <p>{cityDescription}</p>
-                <Anchor to={`/itineraries/city/${cityId}`}>
-                  <Button variant="primary">Show Itinerary</Button>
-                </Anchor>
-              </div>
-            </Container>
+            <div className="city-detail-overlay-content">
+              <h2>{cityName}</h2>
+              <p>{cityDescription}</p>
+              <Anchor to={`/itineraries/city/${cityId}`}>
+                <Button className="btn-primary">Show Itinerary</Button>
+              </Anchor>
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

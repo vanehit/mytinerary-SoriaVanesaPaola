@@ -51,6 +51,18 @@
 .footer-navbar {
   display: flex;
   flex-direction: row-reverse;
-  align-items:end; /* Opcional: centrar horizontalmente */
-  margin-top: auto; /* Empujar hacia la parte inferior */
+  align-items:end; 
+  margin-top: auto;
+}
+
+.container__footer {
+  flex-direction: column; 
+  align-items: left;
+  /*position: absolute;*/
+  width: 100%;
+  left: 0;
+  bottom: 0; 
+  z-index: 1;
+  clear: both;
+  background-color: transparent;
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../store/actions/authActions';
 import { useNavigate } from 'react-router-dom';
@@ -22,6 +22,11 @@ const Signup = () => {
     role: 'user',
   });
 
+  useEffect(() => {
+    // Limpia el error cuando el componente se monta
+    dispatch({ type: 'CLEAR_AUTH_ERROR' }); // Debes definir esta acción en tu reducer
+  }, []);
+
   const handleChange = (e) => {
     // Actualizaamos el estado del formulario
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -31,28 +36,28 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-    await dispatch(registerUser(formData));
+      await dispatch(registerUser(formData));
 
-    if (isAuthenticated) {
-      // Muestramos la alerta de éxito utilizando SweetAlert2
-      Swal.fire({
-        icon: 'success',
-        title: 'Registration Successful',
-        text: 'You have successfully registered.',
-      });
+      if (isAuthenticated) {
+        // Muestra la alerta de éxito utilizando SweetAlert2
+        Swal.fire({
+          icon: 'success',
+          title: 'Registration Successful',
+          text: 'You have successfully registered.',
+        });
 
-      // Redireccionamos a la página de inicio después de un tiempo
-      setTimeout(() => {
-        navigate('/');
-      }, 2000);
+        // Espera 2 segundos y luego redirige al usuario a la página de inicio de sesión
+        setTimeout(() => {
+          navigate('/login'); // Redirige a la página de inicio de sesión
+        }, 2000);
+      }
+    } catch (err) {
+      console.error('Error registering user:', err);
     }
-  } catch (err) {
-    console.error('Error registering user:', err);
-  }
-};
+  };
 
   return (
-    <div className="signup-container">
+    <div className="signup-form">
       <div className="background-image"></div>
       <div className="row justify-content-center">
         <div className="col-md-6 login-form">
