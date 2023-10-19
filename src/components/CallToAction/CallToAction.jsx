@@ -7,8 +7,9 @@ const CallToAction = () => {
     <section className="call-to-action">
       <div className="call-to-action-container">
         <div className="content">
-          <h2 className="cta-title">Explore Amazing Cities</h2>
-          <p className="cta-text">Discover the best cities to travel and explore the world with us.</p>
+          <div className="cta-container">
+            <p className="cta-text">Our app will help you find the perfect path for your next trip. With an easy-to-use interface and a host of itinerary options, planning your next trip has never been easier.</p>
+          </div>
           <Anchor to="/cities" className="btn btn-primary">
             See Cities
           </Anchor>

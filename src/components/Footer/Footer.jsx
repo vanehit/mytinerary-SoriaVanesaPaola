@@ -1,12 +1,16 @@
 import React from 'react';
 import { FaTwitter, FaFacebook, FaInstagram, FaGithub } from 'react-icons/fa';
-import FooterNavbar from './FooterNavbar'; 
+import './Footer.css';
 
 const Footer = () => {
   return (
     <>
-       <footer className='container__footer'>
-        <div className="footer-content">
+      <footer className="custom-footer">
+        <div className="container mx-auto">
+          <nav className="flex justify-center mb-4">
+            <a href="/">Home</a>
+            <a href="/cities">Cities</a>
+          </nav>
           <div className="footer-social">
             <a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer">
               <FaTwitter className="social-icon" />
@@ -21,12 +25,10 @@ const Footer = () => {
               <FaGithub className="social-icon" />
             </a>
           </div>
-
-          <FooterNavbar />
-          
-        </div>
-        <div className="footer-author">
-          <p>Vanesa Paola Soria - COHORT: APP MERN 06 TT</p>
+        
+        <p className="text-center mt-4">
+          Vanesa Paola Soria - COHORT: APP MERN 06 TT
+        </p>
         </div>
       </footer>
     </>

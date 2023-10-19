@@ -1,68 +1,39 @@
-.footer-content{
-  padding: 25px 0; 
-}
-/* Estilos para la sección de redes sociales */
-.footer-social {
-  display: flex;
-  gap: 10px;
-  align-items: center; 
-  padding-left: 25px;
-}
-
-/* Estilos para los iconos de las redes sociales */
-.social-icon {
-  font-size: 30px;
-  color: #007bff; 
-  transition: color 0.3s ease;
-}
-
-.social-icon:hover {
-  color: #feac04; 
-}
-
-
-/* Estilos para el fotterNavbar */
-/* Estilo para los enlaces en negrita y efecto hover */
-.nav-itemFooter {
-  font-weight: bold;
-  color: #333; 
-  text-decoration: none; 
-  margin-right: 20px; 
-  transition: color 0.3s; 
-}
-
-.nav-itemFooter:last-child {
-  margin-right: 20px; 
-}
-
-.nav-itemFooter:hover {
-  color: #007bff; 
-}
-
-
-/* Estilos para el autor */
-.footer-author {
-  margin-top: 10px; /* Añade un espacio superior para separar del contenido superior */
-  font-size: 14px; /* Tamaño de fuente del autor */
-  color: #333; /* Color de texto del autor */
-  text-align: center; /* Centra horizontalmente el autor */
-}
-
-.footer-navbar {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items:end; 
-  margin-top: auto;
-}
-
-.container__footer {
-  flex-direction: column; 
-  align-items: left;
-  /*position: absolute;*/
-  width: 100%;
-  left: 0;
-  bottom: 0; 
-  z-index: 1;
-  clear: both;
-  background-color: transparent;
-}
+/* Estilos para el Footer */
+footer {
+    background-color: #feac04; 
+    color: #fff; 
+    padding: 30px 0; 
+    text-align: center; 
+  }
+  
+  /* Estilos para los enlaces de navegación en el Footer */
+  footer a {
+    color: #fff; 
+    text-decoration: none; 
+    margin: 0 10px; 
+    font-size: 18px; 
+  }
+  
+  footer a:hover {
+    text-decoration: underline; 
+  }
+  
+  /* Estilos para los íconos de redes sociales en el Footer */
+  .social-icon {
+    font-size: 24px; 
+    color: #fff; 
+    margin: 0 10px; 
+  }
+  
+  /* Estilos para el texto del Footer */
+  footer p {
+    margin-top: 10px; 
+    font-size: 16px; 
+  }
+  
+  /* Estilos para el nombre y cohort del Footer */
+  footer p:last-child {
+    font-weight: bold; 
+    margin-top: 10px; 
+  }
+  

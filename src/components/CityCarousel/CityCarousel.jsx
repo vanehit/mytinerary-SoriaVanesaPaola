@@ -1,31 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Carousel, Row, Col } from 'react-bootstrap';
 import CityCard from '../CityCard/CityCard';
+import { useSelector, useDispatch } from 'react-redux'; // Importa useSelector y useDispatch
+import { fetchCities } from '../../store/actions/cityActions'; // Importa la acción para cargar las ciudades
 import './CityCarousel.css';
 
 const CityCarousel = () => {
-  const [cities, setCities] = useState([]);
+  const cities = useSelector((state) => state.city.cities); // Extrae los datos de las ciudades desde el estado de Redux
   const [index, setIndex] = useState(0);
+  const dispatch = useDispatch(); // Obtiene la función de despacho
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
 
   useEffect(() => {
-    // Realizamos la solicitud HTTP para obtener los datos desde el servidor
-    fetch('http://localhost:5000/cities')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log('Data from server:', data);
-        setCities(data);
-      })
-      .catch((error) => console.error('Error fetching cities:', error));
-  }, []);
+    // Utiliza la acción para cargar las ciudades desde el servidor
+    dispatch(fetchCities());
+  }, [dispatch]);
 
   // Divide las ciudades en grupos de 4 para mostrar 4 imágenes por vista
   const citiesGroups = cities.reduce((acc, city, index) => {

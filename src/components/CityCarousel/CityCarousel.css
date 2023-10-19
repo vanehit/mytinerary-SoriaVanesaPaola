@@ -1,23 +1,18 @@
 .city-carousel-container {
-    background-color: #f5f5f5; 
-    padding: 20px 0; 
-    margin-top: 20px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
-  }
-  
-  .carousel-item {
-    background-color: #fff; 
-    padding: 10px;
-  }
-  
-  .carousel-title {
-    font-size: 24px; 
-    font-weight: bold; 
-  }
-  
-  .carousel-image {
-    max-width: 100%; 
-  }
+  background-color: #f5f5f5;
+  padding: 20px 0;
+  margin-top: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
 
+.carousel-item {
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #e0e0e0; /* Agregar un borde para resaltar las tarjetas */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agregar una sombra */
+}
 
-  
+.carousel-title {
+  font-size: 30px;
+  font-weight: bold;
+}

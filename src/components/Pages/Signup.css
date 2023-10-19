@@ -22,15 +22,13 @@
     padding: 20px;
     margin-top: 80px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   }
   
   
   /* Estilo para la imagen seleccionada */
   .selected-image {
-    margin-top: 10px;
     max-width: 100%;
-    height: auto;
+    height: 100%;
   }
   
   
