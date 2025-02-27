@@ -8,7 +8,7 @@ const Layout = () => {
   return (
 
       <>
-          <Header /> {/* rEste enderiza el componente Header */}
+          <Header />
           <div>
               <Outlet /> {/* este renderiza el contenido de las rutas */}
           </div>

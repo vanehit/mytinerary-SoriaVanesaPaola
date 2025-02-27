@@ -1,5 +1,6 @@
 import React from 'react';
 import './CallToAction.css';
+import { Link } from 'react-router-dom';
 
 const CallToAction = () => {
   return (
@@ -9,7 +10,9 @@ const CallToAction = () => {
           <div className="content">
             <h2>Explore amazing cities</h2>
             <p>Discover the best cities to travel and explore the world with us.</p>
-            <button className="btn">See Cities</button>
+            <button className="btn">
+              <Link to="/cities">See Cities</Link>
+            </button>
           </div>
         </div>
       </section>
@@ -18,3 +21,4 @@ const CallToAction = () => {
 };
 
 export default CallToAction;
+

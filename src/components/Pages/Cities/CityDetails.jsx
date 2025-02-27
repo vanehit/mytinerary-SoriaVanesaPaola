@@ -1,58 +1,104 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; 
-import { Container } from 'react-bootstrap';
-import CityCard from '../../CityCard/CityCard'; 
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { fetchCityDetails } from '../../../Redux/Slices/CityDetailsSlice';
+import { Container, Row, Col, Card, Button, ListGroup } from 'react-bootstrap';
 
-const CityDetail = () => {
-  const { _id } = useParams();
-  //console.log("ID:", _id);
-  const [city, setCity] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+const CityDetails = () => {
+  const { id: cityId } = useParams();
+  const dispatch = useDispatch();
+  const { selectedCity, loading, error } = useSelector(state => state.cityDetails);
 
   useEffect(() => {
-    // Hacer la solicitud a la API para obtener los detalles de la ciudad
-    axios.get(`http://localhost:5000/cities/${_id}`)
-      .then(response => {
-        setCity(response.data);
-        setIsLoading(false); // Marca que la carga se ha completado
-      })
-      .catch(err => {
-        console.error('Error fetching city details:', err);
-        setIsLoading(false); // Marca que la carga se ha completado incluso si hay error
-      });
-  },[_id]);
+    if (!selectedCity || selectedCity._id !== cityId) {
+      dispatch(fetchCityDetails(cityId));
+    }
+  }, [dispatch, cityId, selectedCity]);
 
-  if (isLoading) {
-    return <div>Loading...</div>; //  mensaje de carga mientras se obtienen los detalles
-  }
-
-  if (!city) {
-    return <div>City not found</div>;
-  }
-  
-  const imageUrlPrefix = '';
-
+  if (loading) return <p>Cargando...</p>;
+  if (error) return <p>Error: {error}</p>;
+  if (!selectedCity?.title) return <p>No se encontró la ciudad.</p>;
 
   return (
-    
-    <Container className="city-detail">
-      <div className="city-detail-background"></div>
-      <div className="city-detail-overlay">
-        <CityCard
-          cityName={city.name}
-          imageUrl={`${imageUrlPrefix}${city.imageUrl}`}
-          country={city.location.country}
-          city={city.location.city}
+    <Container className="city-details-container">
+      <h2>{selectedCity.title}</h2>
+
+      {/* Imagen con estilo Polaroid */}
+      {selectedCity.imageURL && (
+        <img 
+          src={selectedCity.imageURL} 
+          alt={selectedCity.title} 
+          className="polaroid-image mb-4"
         />
-      </div>
+      )}
+
+      {/* Descripción de la ciudad */}
+      <p>{selectedCity.description}</p>
+
+      {/* Ubicación */}
+      {selectedCity.location && (
+        <p><strong>Ubicación:</strong> {selectedCity.location.city}, {selectedCity.location.country}</p>
+      )}
+
+      {/* Actividades */}
+      <h3>Actividades</h3>
+      <Row>
+        {selectedCity.activities?.length > 0 ? (
+          selectedCity.activities.map(activity => (
+            <Col key={activity._id} xs={12} sm={6} md={4} lg={3}>
+              <Card className="mb-3">
+                <Card.Body>
+                  <Card.Title>{activity.name}</Card.Title>
+                  <Card.Text>{activity.description || 'Sin descripción disponible.'}</Card.Text>
+                  <Button variant="primary">Más detalles</Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))
+        ) : (
+          <Col>
+            <p>No hay actividades disponibles para esta ciudad.</p>
+          </Col>
+        )}
+      </Row>
+
+      {/* Itinerarios */}
+      <h3>Itinerarios</h3>
+      <Row>
+        {selectedCity.itineraries?.length > 0 ? (
+          selectedCity.itineraries.map(itinerary => (
+            <Col key={itinerary._id} xs={12} sm={6} md={4} lg={3}>
+              <Card className="mb-3">
+                <Card.Body>
+                  <Card.Title>{itinerary.title}</Card.Title>
+                  <Card.Text>{itinerary.description || 'Sin descripción disponible.'}</Card.Text>
+                  <Button variant="primary">Ver itinerario</Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))
+        ) : (
+          <Col>
+            <p>No hay itinerarios disponibles para esta ciudad.</p>
+          </Col>
+        )}
+      </Row>
+
+      {/* Comentarios */}
+      <h3>Comentarios</h3>
+      {selectedCity.comments?.length > 0 ? (
+        <ListGroup>
+          {selectedCity.comments.map(comment => (
+            <ListGroup.Item key={comment._id}>
+              <strong>{comment.author}</strong>: {comment.text}
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+      ) : (
+        <p>No hay comentarios disponibles para esta ciudad.</p>
+      )}
     </Container>
   );
 };
 
-export default CityDetail;
-
-
-
-
-
+export default CityDetails;

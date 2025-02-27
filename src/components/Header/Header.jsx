@@ -1,10 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PersonFill } from 'react-bootstrap-icons';
 import { Link as Anchor } from 'react-router-dom';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 
 const Header = () => {
   const [expanded, setExpanded] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser)); // Si hay usuario, guardarlo en el estado
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('user'); // Eliminar usuario del localStorage
+    setUser(null);
+  };
 
   return (
     <Navbar className="transparent-navbar" expand="lg">
@@ -23,9 +36,17 @@ const Header = () => {
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
-        <Anchor className="btn" to="/login">
-          <PersonFill /> Log In
-        </Anchor>
+
+        {/* Mostrar el botón según si el usuario está logueado o no */}
+        {user ? (
+          <Button className="btn btn-success" onClick={handleLogout}>
+            <PersonFill /> Logout
+          </Button>
+        ) : (
+          <Anchor className="btn btn-primary" to="/SignIn">
+            <PersonFill /> Sign In
+          </Anchor>
+        )}
       </Container>
     </Navbar>
   );

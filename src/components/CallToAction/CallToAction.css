@@ -5,7 +5,7 @@
 
 
 /* Estilos para el botón */
-.btn-primary {
+.btn {
     background-color: #F7740F;
     color: #fff;
     font-size: 20px;
@@ -15,7 +15,7 @@
     cursor: pointer;
   }
   
-  .btn-primary:hover {
+  .btn:hover {
     background-color: #feac04;
   }
 

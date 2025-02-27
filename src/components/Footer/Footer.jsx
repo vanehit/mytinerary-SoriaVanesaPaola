@@ -37,8 +37,8 @@ const Footer = () => {
                         </Anchor>
                     </li>
                     </ul>
-                    <Anchor className="btn" to="/login">
-                    <PersonFill /> Log In
+                    <Anchor className="btn" to="/SignIn">
+                    <PersonFill /> Sign In
                     </Anchor>
                 </div>
                 </nav>
@@ -52,3 +52,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
